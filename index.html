@@ -94,7 +94,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
 <header>
   <div class="eyebrow">c. 800 BCE → present · three traditions</div>
   <h1>World Philosophy Timeline</h1>
-  <p class="lede">The key thinkers of Greece, India and China, era by era, with the texts they left and the ideas they are known for. Search or filter, and tap any person, text or idea to open it on Wikipedia.</p>
+  <p class="lede">The key thinkers of the Western, Indian &amp; Persian, and Chinese &amp; East Asian traditions, era by era, with the texts they left and the ideas they are known for. Search or filter, and tap any person, text or idea to open it on Wikipedia.</p>
 </header>
 
 <div class="bar" id="bar">
@@ -108,7 +108,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
     <div class="grp" role="group" aria-label="Traditions">
       <span class="grp-label">Traditions</span>
       <button class="tog" id="tr-w" type="button" data-tr="w" aria-pressed="true">Greek &amp; Western</button>
-      <button class="tog" id="tr-n" type="button" data-tr="n" aria-pressed="true">Indian</button>
+      <button class="tog" id="tr-n" type="button" data-tr="n" aria-pressed="true">Indian &amp; Persian</button>
       <button class="tog" id="tr-c" type="button" data-tr="c" aria-pressed="true">Chinese &amp; East Asian</button>
     </div>
     <div class="grp" role="group" aria-label="Show">
@@ -124,7 +124,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
 <main class="cols" id="grid"></main>
 <p class="nores" id="nores" hidden>No thinkers match that search. Try a broader term or turn traditions back on.</p>
 
-<footer>The Greek &amp; Western column follows the figures covered in Daniel N. Robinson’s course <i>The Great Ideas of Philosophy</i> (2nd ed.), which includes historians, scientists and political writers who shaped Western thought; the Indian and Chinese columns are an editorial selection of the most widely taught thinkers. Texts marked “compiled” were assembled by disciples or later followers; “attrib.” marks traditional attributions that modern scholars doubt. “trad.” marks traditional dates. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Islamic and Jewish thinkers of the medieval period are placed in the Western column because they worked in the Greek philosophical lineage.</footer>
+<footer>The Greek &amp; Western column follows the figures covered in Daniel N. Robinson’s course <i>The Great Ideas of Philosophy</i> (2nd ed.), which includes historians, scientists and political writers who shaped Western thought; the Indian &amp; Persian and Chinese &amp; East Asian columns loosely follow Grant Hardy’s course <i>Great Minds of the Eastern Intellectual Tradition</i>, which also takes in Persia, Japan, Korea and Tibet. Texts marked “compiled” were assembled by disciples or later followers; “attrib.” marks traditional attributions that modern scholars doubt. “trad.” marks traditional dates. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Islamic thinkers appear where those courses place them: Avicenna and Averroes, who worked in the Greek lineage, in the Western column; Al-Biruni, Sirhindi and Iqbal in the Indian &amp; Persian column.</footer>
 </div>
 
 <script>
@@ -136,7 +136,7 @@ const ERAS=[
  ["earlymodern","Early modern","c. 1400–1800"],
  ["modern","Modern","c. 1800–1950"],
  ["contemporary","Contemporary","c. 1950–present"]];
-const TR={w:"Greek & Western",n:"Indian",c:"Chinese & East Asian"};
+const TR={w:"Greek & Western",n:"Indian & Persian",c:"Chinese & East Asian"};
 // [era, tradition, person (or "" for anonymous text), dates, texts, ideas]
 const D=[
 ["early","w","Homer","c. 8th c. BCE",["Iliad","Odyssey"],["Arete (excellence)","Heroic fate"]],
@@ -145,6 +145,7 @@ const D=[
 ["early","w","Pythagoras","c. 570–495 BCE",[],["All is number (Pythagorean)","Transmigration of souls"]],
 ["early","w","Heraclitus","c. 535–475 BCE",["Fragments"],["Flux","Logos"]],
 ["early","n","","c. 1500–1000 BCE",["Rigveda"],["Rta (cosmic order)"]],
+["early","n","Zarathustra","date uncertain; c. 1500–500 BCE",["Gathas"],["Good vs. evil dualism","Asha (truth and order)"]],
 ["early","n","Yajnavalkya","c. 8th–7th c. BCE (trad.)",["Brihadaranyaka Upanishad"],["Atman = Brahman","Neti neti"]],
 ["early","n","Uddalaka Aruni","c. 8th c. BCE",["Chandogya Upanishad"],["Tat tvam asi"]],
 ["early","n","Kapila","traditional",[],["Samkhya: purusha & prakriti"]],
@@ -170,6 +171,7 @@ const D=[
 ["axial","c","Sunzi","trad. 544–496 BCE",["The Art of War (attrib.)"],["Winning without fighting"]],
 ["axial","c","Mozi","c. 470–391 BCE",["Mozi"],["Jian ai (impartial care)"]],
 ["axial","c","Mencius","c. 372–289 BCE",["Mencius (compiled)"],["Human nature is good","Right to depose tyrants"]],
+["axial","c","Hui Shi","c. 370–310 BCE",[],["Paradoxes of space and time"]],
 ["axial","c","Zhuangzi","c. 369–286 BCE",["Zhuangzi (inner chapters)"],["Butterfly dream","Spontaneity","Dao"]],
 
 ["classical","w","Epicurus","341–270 BCE",["Letter to Menoeceus"],["Ataraxia"]],
@@ -182,15 +184,22 @@ const D=[
 ["classical","w","Plotinus","204–270",["Enneads"],["The One","Neoplatonism"]],
 ["classical","w","Augustine","354–430",["Confessions","City of God"],["Original sin","Just war"]],
 ["classical","n","Chanakya","fl. late 4th c. BCE (trad.)",["Arthashastra (attrib.)"],["Statecraft"]],
+["classical","n","Ashoka","c. 304–232 BCE",["Edicts of Ashoka"],["Rule by dhamma"]],
 ["classical","n","","c. 2nd c. BCE",["Bhagavad Gita"],["Nishkama karma","Dharma"]],
 ["classical","n","Patanjali","c. 2nd–4th c. CE",["Yoga Sutras"],["Eight limbs of yoga"]],
 ["classical","n","Gautama (Akshapada)","c. 2nd c. BCE",["Nyaya Sutras"],["Pramanas (means of knowledge)"]],
 ["classical","n","Nagarjuna","c. 150–250",["Mulamadhyamakakarika"],["Shunyata (emptiness)","Two truths"]],
+["classical","n","Mani","c. 216–274",["Shabuhragan"],["Light vs. darkness dualism"]],
 ["classical","n","Thiruvalluvar","c. 1st–5th c.",["Tirukkural"],["Virtue, wealth, love"]],
 ["classical","n","Vasubandhu","c. 4th c.",["Abhidharmakosha"],["Mind-only (Yogacara)"]],
+["classical","n","Ishvarakrishna","c. 350–450",["Samkhyakarika"],["Purusha and prakriti"]],
 ["classical","c","Xunzi","c. 310–235 BCE",["Xunzi"],["Human nature is bad"]],
 ["classical","c","Han Feizi","c. 280–233 BCE",["Han Feizi"],["Legalism","Rule by law"]],
+["classical","c","Dong Zhongshu","c. 179–104 BCE",["Luxuriant Dew of the Spring and Autumn Annals"],["Correlative cosmology","Confucian state orthodoxy"]],
+["classical","c","Sima Qian","c. 145–86 BCE",["Records of the Grand Historian"],["Comprehensive history"]],
 ["classical","c","Wang Chong","27–c. 97",["Lunheng"],["Naturalist skepticism"]],
+["classical","c","Ban Zhao","c. 45–117",["Lessons for Women"],["Education for women"]],
+["classical","c","Ge Hong","283–343",["Baopuzi"],["Daoist alchemy"]],
 
 ["medieval","w","Boethius","c. 477–524",["Consolation of Philosophy"],["Wheel of fortune"]],
 ["medieval","w","Al-Kindi","c. 801–873",["On First Philosophy"],["Harmony of faith and reason"]],
@@ -204,16 +213,26 @@ const D=[
 ["medieval","w","Thomas Aquinas","1225–1274",["Summa Theologica"],["Five ways","Natural law"]],
 ["medieval","w","William of Ockham","c. 1287–1347",[],["Ockham's razor","Nominalism"]],
 ["medieval","w","Ibn Khaldun","1332–1406",["Muqaddimah"],["Asabiyyah (social cohesion)"]],
+["medieval","n","Aryabhata","476–550",["Aryabhatiya"],["Earth's rotation","Place-value arithmetic"]],
 ["medieval","n","Dignaga & Dharmakirti","c. 5th–7th c.",["Pramanavarttika"],["Buddhist epistemology"]],
 ["medieval","n","Shantideva","c. 8th c.",["Bodhicaryavatara"],["Bodhisattva ideal"]],
 ["medieval","n","Adi Shankara","c. 700–750",["Brahma Sutra Bhashya"],["Advaita (non-dualism)","Maya"]],
 ["medieval","n","Abhinavagupta","c. 950–1016",["Tantraloka"],["Rasa aesthetics"]],
+["medieval","n","Al-Biruni","973–c. 1050",["Kitab al-Hind (India)"],["Comparative study of religion"]],
 ["medieval","n","Ramanuja","c. 1077–1157 (trad. 1017–1137)",["Sri Bhashya"],["Qualified non-dualism"]],
 ["medieval","n","Madhva","1238–1317",[],["Dvaita (dualism)"]],
+["medieval","c","Prince Shotoku","574–622",["Seventeen-article constitution"],["Harmony (wa)"]],
+["medieval","c","Xuanzang","c. 602–664",["Great Tang Records on the Western Regions"],["Yogacara in China"]],
+["medieval","c","Wonhyo","617–686",[],["One Mind","Harmonizing doctrines"]],
 ["medieval","c","Huineng","638–713",["Platform Sutra (compiled)"],["Sudden enlightenment"]],
 ["medieval","c","Linji","d. 866",[],["Koan practice"]],
+["medieval","c","Murasaki Shikibu","c. 973–c. 1014",["The Tale of Genji"],["Mono no aware"]],
+["medieval","c","Shen Kuo","1031–1095",["Dream Pool Essays"],["Magnetic compass"]],
 ["medieval","c","Zhu Xi","1130–1200",["Four Books commentaries"],["Li and qi","Investigation of things"]],
 ["medieval","c","Dogen","1200–1253",["Shobogenzo"],["Shikantaza (just sitting)"]],
+["medieval","c","Nichiren","1222–1282",["Risshō Ankoku Ron"],["Lotus Sutra devotion"]],
+["medieval","c","Tsongkhapa","1357–1419",["Lamrim Chenmo"],["Gelug school"]],
+["medieval","c","Zeami","c. 1363–c. 1443",["Fushikaden"],["Yugen"]],
 
 ["earlymodern","w","Pico della Mirandola","1463–1494",["Oration on the Dignity of Man"],["Renaissance humanism"]],
 ["earlymodern","w","Machiavelli","1469–1527",["The Prince"],["Virtù and fortuna"]],
@@ -240,8 +259,12 @@ const D=[
 ["earlymodern","n","Kabir","c. 1440–1518",["Bijak"],["Nirguna bhakti"]],
 ["earlymodern","n","Guru Nanak","1469–1539",["Hymns in the Guru Granth Sahib"],["Ik Onkar"]],
 ["earlymodern","n","Madhusudana Sarasvati","c. 1540–1640",["Advaitasiddhi"],["Advaita (non-dualism)"]],
+["earlymodern","n","Ahmad Sirhindi","1564–1624",["Maktubat (Letters)"],["Unity of witness (wahdat al-shuhud)"]],
+["earlymodern","c","King Sejong","1397–1450",["Hunminjeongeum"],["Hangul alphabet"]],
 ["earlymodern","c","Wang Yangming","1472–1529",["Instructions for Practical Living (compiled)"],["Unity of knowing and acting"]],
+["earlymodern","c","Sen no Rikyu","1522–1591",[],["Way of tea","Wabi"]],
 ["earlymodern","c","Huang Zongxi","1610–1695",["Waiting for the Dawn"],["Critique of absolutism"]],
+["earlymodern","c","Hakuin","1686–1769",[],["Koan training","Sound of one hand"]],
 ["earlymodern","c","Motoori Norinaga","1730–1801",[],["Mono no aware"]],
 
 ["modern","w","Gall","1758–1828",["Anatomy and Physiology of the Nervous System"],["Phrenology","Localization of brain function"]],
@@ -264,9 +287,13 @@ const D=[
 ["modern","n","Mahatma Gandhi","1869–1948",["Hind Swaraj"],["Satyagraha","Swaraj","Ahimsa"]],
 ["modern","n","Sri Aurobindo","1872–1950",["The Life Divine"],["Integral yoga"]],
 ["modern","n","K. C. Bhattacharya","1875–1949",["Swaraj in Ideas"],["Decolonizing the mind"]],
+["modern","c","Fukuzawa Yukichi","1835–1901",["An Encouragement of Learning"],["Independence and self-respect"]],
+["modern","c","Kang Youwei","1858–1927",["Book of Great Unity"],["Confucian reform"]],
+["modern","c","Sun Yat-sen","1866–1925",["Three Principles of the People"],["Nationalism, democracy, livelihood"]],
 ["modern","c","Nishida Kitaro","1870–1945",["An Inquiry into the Good"],["Pure experience","Basho (place)"]],
+["modern","c","Han Yongun","1879–1944",["On the Reformation of Korean Buddhism"],["Buddhist reform"]],
 ["modern","c","Watsuji Tetsuro","1889–1960",["Fudo (Climate and Culture)"],["Betweenness"]],
-["modern","c","Hu Shih","1891–1962",[],["Chinese pragmatism","Pragmatism"]],
+["modern","c","Hu Shih","1891–1962",[],["Vernacular literature","Pragmatism"]],
 ["modern","c","Liang Shuming","1893–1988",[],["New Confucianism"]],
 
 ["modern","w","Sartre","1905–1980",["Being and Nothingness"],["Existence precedes essence"]],
@@ -278,10 +305,12 @@ const D=[
 ["contemporary","w","John Rawls","1921–2002",["A Theory of Justice"],["Veil of ignorance"]],
 ["contemporary","w","Foucault","1926–1984",["Discipline and Punish"],["Power/knowledge"]],
 ["contemporary","w","Peter Singer","b. 1946",["Animal Liberation"],["Effective altruism"]],
+["modern","n","Muhammad Iqbal","1877–1938",["The Reconstruction of Religious Thought in Islam"],["Khudi (selfhood)"]],
 ["modern","n","B. R. Ambedkar","1891–1956",["Annihilation of Caste"],["Navayana Buddhism"]],
 ["contemporary","n","J. Krishnamurti","1895–1986",["Freedom from the Known"],["Truth is a pathless land"]],
 ["contemporary","n","B. K. Matilal","1935–1991",["Perception"],["Analytic Indian philosophy"]],
 ["contemporary","n","Amartya Sen","b. 1933",["Development as Freedom","The Idea of Justice"],["Capability approach"]],
+["contemporary","c","Mao Zedong","1893–1976",["On Contradiction","Quotations from Chairman Mao"],["Maoism","Mass line"]],
 ["contemporary","c","Nishitani Keiji","1900–1990",["Religion and Nothingness"],["Shunyata (emptiness)"]],
 ["contemporary","c","Mou Zongsan","1909–1995",[],["Moral metaphysics","New Confucianism"]],
 ["contemporary","c","Tu Weiming","b. 1940",[],["Confucian humanism"]]
@@ -289,8 +318,8 @@ const D=[
 
 // Key figures: the most widely taught and cited thinkers (anonymous texts keyed by title)
 const KEY=new Set(["Homer","Pythagoras","Heraclitus","Parmenides","Sophocles","Herodotus","Socrates","Hippocrates","Plato","Aristotle","Cicero","Marcus Aurelius","Augustine","Avicenna (Ibn Sina)","Averroes (Ibn Rushd)","Roger Bacon","Thomas Aquinas","Pico della Mirandola","Francis Bacon","Descartes","Hobbes","Locke","Newton","Voltaire","La Mettrie","Hume","Thomas Reid","Rousseau","Kant","The Federalist Papers (Hamilton, Madison, Jay)","Gall","Hegel","Nietzsche","J. S. Mill","Darwin","Marx","William James","Freud","Wittgenstein","Turing",
-"Rigveda","Yajnavalkya","Mahavira","Gautama Buddha","Chanakya","Bhagavad Gita","Patanjali","Nagarjuna","Adi Shankara","Ramanuja","Swami Vivekananda","Mahatma Gandhi","B. R. Ambedkar",
-"I Ching","Laozi","Confucius","Sunzi","Mencius","Zhuangzi","Han Feizi","Huineng","Zhu Xi","Dogen","Wang Yangming","Nishida Kitaro","Mou Zongsan"]);
+"Rigveda","Yajnavalkya","Zarathustra","Mahavira","Gautama Buddha","Bhagavad Gita","Chanakya","Ashoka","Ishvarakrishna","Patanjali","Nagarjuna","Vasubandhu","Mani","Aryabhata","Adi Shankara","Ramanuja","Madhva","Al-Biruni","Guru Nanak","Ahmad Sirhindi","Rabindranath Tagore","Muhammad Iqbal","Mahatma Gandhi",
+"Confucius","Laozi","Mozi","Hui Shi","Zhuangzi","Mencius","Xunzi","Sunzi","Han Feizi","Dong Zhongshu","Sima Qian","Ban Zhao","Ge Hong","Prince Shotoku","Xuanzang","Wonhyo","Huineng","Murasaki Shikibu","Shen Kuo","Zhu Xi","Dogen","Nichiren","Tsongkhapa","Zeami","King Sejong","Wang Yangming","Sen no Rikyu","Hakuin","Fukuzawa Yukichi","Kang Youwei","Sun Yat-sen","Han Yongun","Hu Shih","Mao Zedong"]);
 const state={q:"",key:true,tr:{w:true,n:true,c:true},sh:{t:true,i:true}};
 try{const s=JSON.parse(localStorage.getItem("pt-state")||"null");if(s){state.tr=s.tr||state.tr;state.sh=s.sh||state.sh;}}catch(e){}
 const save=()=>{try{localStorage.setItem("pt-state",JSON.stringify({tr:state.tr,sh:state.sh}))}catch(e){}};
@@ -314,7 +343,7 @@ const W={"Transmigration of souls":"Metempsychosis","All is number (Pythagorean)
 "Locke":"John Locke","Essay Concerning Human Understanding":"An Essay Concerning Human Understanding","Natural rights":"Natural rights and legal rights",
 "Hume":"David Hume","Is–ought gap":"Is–ought problem","Skepticism":"Philosophical skepticism","Rousseau":"Jean-Jacques Rousseau",
 "Kant":"Immanuel Kant","Synthetic a priori":"Analytic–synthetic distinction","Hegel":"Georg Wilhelm Friedrich Hegel","Phenomenology of Spirit":"The Phenomenology of Spirit",
-"J. S. Mill":"John Stuart Mill","t:Utilitarianism":"Utilitarianism (book)","Marx":"Karl Marx","Capital":"Das Kapital","On Nature":"On Nature (Parmenides)","Homer":"Homer","Iliad":"Iliad","Odyssey":"Odyssey","Arete (excellence)":"Arete","Heroic fate":"Moirai","Oedipus Rex":"Oedipus Rex","Antigone":"Antigone (Sophocles play)","Tragic fate":"Greek tragedy","Divine vs. human law":"Antigone (Sophocles play)","Histories":"Histories (Herodotus)","History as inquiry":"Herodotus","Hippocratic Corpus (attrib.)":"Hippocratic Corpus","Natural causes of disease":"Hippocrates","On the Republic":"De re publica","On the Laws":"De Legibus","Natural law":"Natural law","Rule of law":"Rule of law","Averroes (Ibn Rushd)":"Averroes","Roger Bacon":"Roger Bacon","Opus Majus":"Opus Majus","Experimental science":"Scientific method","Pico della Mirandola":"Giovanni Pico della Mirandola","Oration on the Dignity of Man":"Oration on the Dignity of Man","Renaissance humanism":"Renaissance humanism","Francis Bacon":"Francis Bacon","Newton":"Isaac Newton","Principia":"Philosophiæ Naturalis Principia Mathematica","Laws of motion":"Newton's laws of motion","Universal gravitation":"Newton's law of universal gravitation","Candide":"Candide","Letters on the English":"Letters on the English","Religious tolerance":"Toleration","La Mettrie":"Julien Offray de La Mettrie","Man a Machine":"Man a Machine","Materialism":"Materialism","Thomas Reid":"Thomas Reid","An Inquiry into the Human Mind":"An Inquiry into the Human Mind on the Principles of Common Sense","Common sense realism":"Scottish common sense realism","The Federalist Papers (Hamilton, Madison, Jay)":"The Federalist Papers","Separation of powers":"Separation of powers","Checks and balances":"Separation of powers","Gall":"Franz Joseph Gall","Anatomy and Physiology of the Nervous System":"Franz Joseph Gall","Phrenology":"Phrenology","Localization of brain function":"Functional specialization (brain)","Darwin":"Charles Darwin","On the Origin of Species":"On the Origin of Species","The Descent of Man":"The Descent of Man, and Selection in Relation to Sex","Natural selection":"Natural selection","William James":"William James","The Principles of Psychology":"The Principles of Psychology","Stream of consciousness":"Stream of consciousness (psychology)","t:Pragmatism":"William James","Pragmatism":"Pragmatism","Freud":"Sigmund Freud","The Interpretation of Dreams":"The Interpretation of Dreams","Civilization and Its Discontents":"Civilization and Its Discontents","The unconscious":"Unconscious mind","Psychoanalysis":"Psychoanalysis","Turing":"Alan Turing","Computing Machinery and Intelligence":"Computing Machinery and Intelligence","Turing test":"Turing test","Computability":"Computability","The Communist Manifesto (with Engels)":"The Communist Manifesto","Yin and yang (later commentaries)":"Yin and yang","Right to depose tyrants":"Mandate of Heaven","Virtù and fortuna":"Virtù","Analects (compiled)":"Analects","Pali Canon (compiled)":"Pali Canon","Dhammapada (compiled)":"Dhammapada","Platform Sutra (compiled)":"Platform Sutra","Principles of Philosophy":"Principles of Philosophy","Alienation":"Marx's theory of alienation",
+"J. S. Mill":"John Stuart Mill","t:Utilitarianism":"Utilitarianism (book)","Marx":"Karl Marx","Capital":"Das Kapital","Zarathustra":"Zoroaster","Gathas":"Gathas","Good vs. evil dualism":"Zoroastrianism","Asha (truth and order)":"Asha","Ashoka":"Ashoka","Edicts of Ashoka":"Edicts of Ashoka","Rule by dhamma":"Ashoka","Mani":"Mani (prophet)","Shabuhragan":"Shabuhragan","Light vs. darkness dualism":"Manichaeism","Ishvarakrishna":"Ishvara Krishna","Samkhyakarika":"Samkhyakarika","Purusha and prakriti":"Samkhya","Dong Zhongshu":"Dong Zhongshu","Luxuriant Dew of the Spring and Autumn Annals":"Luxuriant Dew of the Spring and Autumn Annals","Correlative cosmology":"Dong Zhongshu","Confucian state orthodoxy":"Dong Zhongshu","Sima Qian":"Sima Qian","Records of the Grand Historian":"Records of the Grand Historian","Comprehensive history":"Records of the Grand Historian","Ban Zhao":"Ban Zhao","Lessons for Women":"Lessons for Women","Education for women":"Lessons for Women","Ge Hong":"Ge Hong","Baopuzi":"Baopuzi","Daoist alchemy":"Chinese alchemy","Hui Shi":"Hui Shi","Paradoxes of space and time":"Hui Shi","Aryabhata":"Aryabhata","Aryabhatiya":"Aryabhatiya","Earth's rotation":"Aryabhata","Place-value arithmetic":"Aryabhata","Al-Biruni":"Al-Biruni","Kitab al-Hind (India)":"Al-Biruni","Sadhana":"Rabindranath Tagore","t:Nationalism":"Rabindranath Tagore","Comparative study of religion":"Comparative religion","Prince Shotoku":"Prince Shōtoku","Seventeen-article constitution":"Seventeen-article constitution","Harmony (wa)":"Wa (Japanese culture)","Xuanzang":"Xuanzang","Great Tang Records on the Western Regions":"Great Tang Records on the Western Regions","Yogacara in China":"East Asian Yogācāra","Wonhyo":"Wonhyo","One Mind":"Wonhyo","Harmonizing doctrines":"Wonhyo","Murasaki Shikibu":"Murasaki Shikibu","The Tale of Genji":"The Tale of Genji","Mono no aware":"Mono no aware","Shen Kuo":"Shen Kuo","Dream Pool Essays":"Dream Pool Essays","Magnetic compass":"Compass","Nichiren":"Nichiren","Risshō Ankoku Ron":"Nichiren","Lotus Sutra devotion":"Nichiren Buddhism","Tsongkhapa":"Je Tsongkhapa","Lamrim Chenmo":"Lamrim","Gelug school":"Gelug","Zeami":"Zeami Motokiyo","Fushikaden":"Fūshikaden","Yugen":"Japanese aesthetics","Ahmad Sirhindi":"Ahmad Sirhindi","Maktubat (Letters)":"Ahmad Sirhindi","Unity of witness (wahdat al-shuhud)":"Ahmad Sirhindi","King Sejong":"Sejong the Great","Hunminjeongeum":"Hunminjeongeum","Hangul alphabet":"Hangul","Sen no Rikyu":"Sen no Rikyū","Way of tea":"Japanese tea ceremony","Wabi":"Wabi-sabi","Hakuin":"Hakuin Ekaku","Koan training":"Kōan","Sound of one hand":"Kōan","Muhammad Iqbal":"Muhammad Iqbal","The Reconstruction of Religious Thought in Islam":"The Reconstruction of Religious Thought in Islam","Khudi (selfhood)":"Khudi","Fukuzawa Yukichi":"Fukuzawa Yukichi","An Encouragement of Learning":"Fukuzawa Yukichi","Independence and self-respect":"Fukuzawa Yukichi","Kang Youwei":"Kang Youwei","Book of Great Unity":"Kang Youwei","Confucian reform":"Hundred Days' Reform","Sun Yat-sen":"Sun Yat-sen","Three Principles of the People":"Three Principles of the People","Nationalism, democracy, livelihood":"Three Principles of the People","Han Yongun":"Han Yong-un","On the Reformation of Korean Buddhism":"Han Yong-un","Buddhist reform":"Han Yong-un","Hu Shih":"Hu Shih","Vernacular literature":"Written vernacular Chinese","Mao Zedong":"Mao Zedong","On Contradiction":"On Contradiction","Quotations from Chairman Mao":"Quotations from Chairman Mao Tse-tung","Maoism":"Maoism","Mass line":"Mass line","Mozi":"Mozi","t:Mozi":"Mozi (book)","Jian ai (impartial care)":"Mohism","Xunzi":"Xun Kuang","t:Xunzi":"Xunzi (book)","Human nature is bad":"Xun Kuang","Madhva":"Madhvacharya","Dvaita (dualism)":"Dvaita Vedanta","Vasubandhu":"Vasubandhu","Abhidharmakosha":"Abhidharmakośabhāṣya","Mind-only (Yogacara)":"Yogachara","Guru Nanak":"Guru Nanak","Hymns in the Guru Granth Sahib":"Guru Granth Sahib","Ik Onkar":"Ik Onkar","Rabindranath Tagore":"Rabindranath Tagore","Universal humanism":"Rabindranath Tagore","On Nature":"On Nature (Parmenides)","Homer":"Homer","Iliad":"Iliad","Odyssey":"Odyssey","Arete (excellence)":"Arete","Heroic fate":"Moirai","Oedipus Rex":"Oedipus Rex","Antigone":"Antigone (Sophocles play)","Tragic fate":"Greek tragedy","Divine vs. human law":"Antigone (Sophocles play)","Histories":"Histories (Herodotus)","History as inquiry":"Herodotus","Hippocratic Corpus (attrib.)":"Hippocratic Corpus","Natural causes of disease":"Hippocrates","On the Republic":"De re publica","On the Laws":"De Legibus","Natural law":"Natural law","Rule of law":"Rule of law","Averroes (Ibn Rushd)":"Averroes","Roger Bacon":"Roger Bacon","Opus Majus":"Opus Majus","Experimental science":"Scientific method","Pico della Mirandola":"Giovanni Pico della Mirandola","Oration on the Dignity of Man":"Oration on the Dignity of Man","Renaissance humanism":"Renaissance humanism","Francis Bacon":"Francis Bacon","Newton":"Isaac Newton","Principia":"Philosophiæ Naturalis Principia Mathematica","Laws of motion":"Newton's laws of motion","Universal gravitation":"Newton's law of universal gravitation","Candide":"Candide","Letters on the English":"Letters on the English","Religious tolerance":"Toleration","La Mettrie":"Julien Offray de La Mettrie","Man a Machine":"Man a Machine","Materialism":"Materialism","Thomas Reid":"Thomas Reid","An Inquiry into the Human Mind":"An Inquiry into the Human Mind on the Principles of Common Sense","Common sense realism":"Scottish common sense realism","The Federalist Papers (Hamilton, Madison, Jay)":"The Federalist Papers","Separation of powers":"Separation of powers","Checks and balances":"Separation of powers","Gall":"Franz Joseph Gall","Anatomy and Physiology of the Nervous System":"Franz Joseph Gall","Phrenology":"Phrenology","Localization of brain function":"Functional specialization (brain)","Darwin":"Charles Darwin","On the Origin of Species":"On the Origin of Species","The Descent of Man":"The Descent of Man, and Selection in Relation to Sex","Natural selection":"Natural selection","William James":"William James","The Principles of Psychology":"The Principles of Psychology","Stream of consciousness":"Stream of consciousness (psychology)","t:Pragmatism":"William James","Pragmatism":"Pragmatism","Freud":"Sigmund Freud","The Interpretation of Dreams":"The Interpretation of Dreams","Civilization and Its Discontents":"Civilization and Its Discontents","The unconscious":"Unconscious mind","Psychoanalysis":"Psychoanalysis","Turing":"Alan Turing","Computing Machinery and Intelligence":"Computing Machinery and Intelligence","Turing test":"Turing test","Computability":"Computability","The Communist Manifesto (with Engels)":"The Communist Manifesto","Yin and yang (later commentaries)":"Yin and yang","Right to depose tyrants":"Mandate of Heaven","Virtù and fortuna":"Virtù","Analects (compiled)":"Analects","Pali Canon (compiled)":"Pali Canon","Dhammapada (compiled)":"Dhammapada","Platform Sutra (compiled)":"Platform Sutra","Principles of Philosophy":"Principles of Philosophy","Alienation":"Marx's theory of alienation",
 "Nietzsche":"Friedrich Nietzsche","Eternal recurrence":"Eternal return","Wittgenstein":"Ludwig Wittgenstein","Language games":"Language game (philosophy)",
 "Sartre":"Jean-Paul Sartre","One is not born, but becomes, a woman":"The Second Sex","Veil of ignorance":"Original position",
 "Rta (cosmic order)":"Ṛta","Atman = Brahman":"Ātman (Hinduism)","Agamas (compiled)":"Jain Agamas","Anatta (no-self)":"Anattā","Statecraft":"Arthashastra","Arthashastra (attrib.)":"Arthashastra",
