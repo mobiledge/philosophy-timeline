@@ -94,7 +94,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
 <header>
   <div class="eyebrow">c. 800 BCE → present · three traditions</div>
   <h1>World Philosophy Timeline</h1>
-  <p class="lede">The key thinkers of the Western, Indian &amp; Persian, and Chinese &amp; East Asian traditions, era by era, with the texts they left and the ideas they are known for. Search or filter, and tap any person, text or idea to open it on Wikipedia.</p>
+  <p class="lede">The key thinkers of the Western, Indian, and Chinese &amp; East Asian traditions, era by era, with the texts they left and the ideas they are known for. Search or filter, and tap any person, text or idea to open it on Wikipedia.</p>
 </header>
 
 <div class="bar" id="bar">
@@ -108,7 +108,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
     <div class="grp" role="group" aria-label="Traditions">
       <span class="grp-label">Traditions</span>
       <button class="tog" id="tr-w" type="button" data-tr="w" aria-pressed="true">Greek &amp; Western</button>
-      <button class="tog" id="tr-n" type="button" data-tr="n" aria-pressed="true">Indian &amp; Persian</button>
+      <button class="tog" id="tr-n" type="button" data-tr="n" aria-pressed="true">Indian</button>
       <button class="tog" id="tr-c" type="button" data-tr="c" aria-pressed="true">Chinese &amp; East Asian</button>
     </div>
     <div class="grp" role="group" aria-label="Show">
@@ -124,7 +124,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
 <main class="cols" id="grid"></main>
 <p class="nores" id="nores" hidden>No thinkers match that search. Try a broader term or turn traditions back on.</p>
 
-<footer>The Greek &amp; Western column follows the figures covered in Daniel N. Robinson’s course <i>The Great Ideas of Philosophy</i> (2nd ed.), which includes historians, scientists and political writers who shaped Western thought; the Indian &amp; Persian and Chinese &amp; East Asian columns loosely follow Grant Hardy’s course <i>Great Minds of the Eastern Intellectual Tradition</i>, which also takes in Persia, Japan, Korea and Tibet. Texts marked “compiled” were assembled by disciples or later followers; “attrib.” marks traditional attributions that modern scholars doubt. “trad.” marks traditional dates. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Islamic thinkers appear where those courses place them: Avicenna and Averroes, who worked in the Greek lineage, in the Western column; Al-Biruni, Sirhindi and Iqbal in the Indian &amp; Persian column.</footer>
+<footer>The Greek &amp; Western column follows the figures covered in Daniel N. Robinson’s course <i>The Great Ideas of Philosophy</i> (2nd ed.), which includes historians, scientists and political writers who shaped Western thought; the Indian and Chinese &amp; East Asian columns loosely follow Grant Hardy’s course <i>Great Minds of the Eastern Intellectual Tradition</i>, leaving out its lectures on Persia and Islam. Texts marked “compiled” were assembled by disciples or later followers; “attrib.” marks traditional attributions that modern scholars doubt. “trad.” marks traditional dates. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Avicenna and Averroes appear in the Western column because they worked in the Greek philosophical lineage.</footer>
 </div>
 
 <script>
@@ -136,7 +136,7 @@ const ERAS=[
  ["earlymodern","Early modern","c. 1400–1800"],
  ["modern","Modern","c. 1800–1950"],
  ["contemporary","Contemporary","c. 1950–present"]];
-const TR={w:"Greek & Western",n:"Indian & Persian",c:"Chinese & East Asian"};
+const TR={w:"Greek & Western",n:"Indian",c:"Chinese & East Asian"};
 // [era, tradition, person (or "" for anonymous text), dates, texts, ideas]
 const D=[
 ["early","w","Homer","c. 8th c. BCE",["Iliad","Odyssey"],["Arete (excellence)","Heroic fate"]],
@@ -145,7 +145,6 @@ const D=[
 ["early","w","Pythagoras","c. 570–495 BCE",[],["All is number (Pythagorean)","Transmigration of souls"]],
 ["early","w","Heraclitus","c. 535–475 BCE",["Fragments"],["Flux","Logos"]],
 ["early","n","","c. 1500–1000 BCE",["Rigveda"],["Rta (cosmic order)"]],
-["early","n","Zarathustra","date uncertain; c. 1500–500 BCE",["Gathas"],["Good vs. evil dualism","Asha (truth and order)"]],
 ["early","n","Yajnavalkya","c. 8th–7th c. BCE (trad.)",["Brihadaranyaka Upanishad"],["Atman = Brahman","Neti neti"]],
 ["early","n","Uddalaka Aruni","c. 8th c. BCE",["Chandogya Upanishad"],["Tat tvam asi"]],
 ["early","n","Kapila","traditional",[],["Samkhya: purusha & prakriti"]],
@@ -189,7 +188,6 @@ const D=[
 ["classical","n","Patanjali","c. 2nd–4th c. CE",["Yoga Sutras"],["Eight limbs of yoga"]],
 ["classical","n","Gautama (Akshapada)","c. 2nd c. BCE",["Nyaya Sutras"],["Pramanas (means of knowledge)"]],
 ["classical","n","Nagarjuna","c. 150–250",["Mulamadhyamakakarika"],["Shunyata (emptiness)","Two truths"]],
-["classical","n","Mani","c. 216–274",["Shabuhragan"],["Light vs. darkness dualism"]],
 ["classical","n","Thiruvalluvar","c. 1st–5th c.",["Tirukkural"],["Virtue, wealth, love"]],
 ["classical","n","Vasubandhu","c. 4th c.",["Abhidharmakosha"],["Mind-only (Yogacara)"]],
 ["classical","n","Ishvarakrishna","c. 350–450",["Samkhyakarika"],["Purusha and prakriti"]],
@@ -218,7 +216,6 @@ const D=[
 ["medieval","n","Shantideva","c. 8th c.",["Bodhicaryavatara"],["Bodhisattva ideal"]],
 ["medieval","n","Adi Shankara","c. 700–750",["Brahma Sutra Bhashya"],["Advaita (non-dualism)","Maya"]],
 ["medieval","n","Abhinavagupta","c. 950–1016",["Tantraloka"],["Rasa aesthetics"]],
-["medieval","n","Al-Biruni","973–c. 1050",["Kitab al-Hind (India)"],["Comparative study of religion"]],
 ["medieval","n","Ramanuja","c. 1077–1157 (trad. 1017–1137)",["Sri Bhashya"],["Qualified non-dualism"]],
 ["medieval","n","Madhva","1238–1317",[],["Dvaita (dualism)"]],
 ["medieval","c","Prince Shotoku","574–622",["Seventeen-article constitution"],["Harmony (wa)"]],
@@ -259,7 +256,6 @@ const D=[
 ["earlymodern","n","Kabir","c. 1440–1518",["Bijak"],["Nirguna bhakti"]],
 ["earlymodern","n","Guru Nanak","1469–1539",["Hymns in the Guru Granth Sahib"],["Ik Onkar"]],
 ["earlymodern","n","Madhusudana Sarasvati","c. 1540–1640",["Advaitasiddhi"],["Advaita (non-dualism)"]],
-["earlymodern","n","Ahmad Sirhindi","1564–1624",["Maktubat (Letters)"],["Unity of witness (wahdat al-shuhud)"]],
 ["earlymodern","c","King Sejong","1397–1450",["Hunminjeongeum"],["Hangul alphabet"]],
 ["earlymodern","c","Wang Yangming","1472–1529",["Instructions for Practical Living (compiled)"],["Unity of knowing and acting"]],
 ["earlymodern","c","Sen no Rikyu","1522–1591",[],["Way of tea","Wabi"]],
@@ -305,7 +301,6 @@ const D=[
 ["contemporary","w","John Rawls","1921–2002",["A Theory of Justice"],["Veil of ignorance"]],
 ["contemporary","w","Foucault","1926–1984",["Discipline and Punish"],["Power/knowledge"]],
 ["contemporary","w","Peter Singer","b. 1946",["Animal Liberation"],["Effective altruism"]],
-["modern","n","Muhammad Iqbal","1877–1938",["The Reconstruction of Religious Thought in Islam"],["Khudi (selfhood)"]],
 ["modern","n","B. R. Ambedkar","1891–1956",["Annihilation of Caste"],["Navayana Buddhism"]],
 ["contemporary","n","J. Krishnamurti","1895–1986",["Freedom from the Known"],["Truth is a pathless land"]],
 ["contemporary","n","B. K. Matilal","1935–1991",["Perception"],["Analytic Indian philosophy"]],
@@ -318,7 +313,7 @@ const D=[
 
 // Key figures: the most widely taught and cited thinkers (anonymous texts keyed by title)
 const KEY=new Set(["Homer","Pythagoras","Heraclitus","Parmenides","Sophocles","Herodotus","Socrates","Hippocrates","Plato","Aristotle","Cicero","Marcus Aurelius","Augustine","Avicenna (Ibn Sina)","Averroes (Ibn Rushd)","Roger Bacon","Thomas Aquinas","Pico della Mirandola","Francis Bacon","Descartes","Hobbes","Locke","Newton","Voltaire","La Mettrie","Hume","Thomas Reid","Rousseau","Kant","The Federalist Papers (Hamilton, Madison, Jay)","Gall","Hegel","Nietzsche","J. S. Mill","Darwin","Marx","William James","Freud","Wittgenstein","Turing",
-"Rigveda","Yajnavalkya","Zarathustra","Mahavira","Gautama Buddha","Bhagavad Gita","Chanakya","Ashoka","Ishvarakrishna","Patanjali","Nagarjuna","Vasubandhu","Mani","Aryabhata","Adi Shankara","Ramanuja","Madhva","Al-Biruni","Guru Nanak","Ahmad Sirhindi","Rabindranath Tagore","Muhammad Iqbal","Mahatma Gandhi",
+"Rigveda","Yajnavalkya","Mahavira","Gautama Buddha","Bhagavad Gita","Chanakya","Ashoka","Ishvarakrishna","Patanjali","Nagarjuna","Vasubandhu","Aryabhata","Adi Shankara","Ramanuja","Madhva","Guru Nanak","Rabindranath Tagore","Mahatma Gandhi",
 "Confucius","Laozi","Mozi","Hui Shi","Zhuangzi","Mencius","Xunzi","Sunzi","Han Feizi","Dong Zhongshu","Sima Qian","Ban Zhao","Ge Hong","Prince Shotoku","Xuanzang","Wonhyo","Huineng","Murasaki Shikibu","Shen Kuo","Zhu Xi","Dogen","Nichiren","Tsongkhapa","Zeami","King Sejong","Wang Yangming","Sen no Rikyu","Hakuin","Fukuzawa Yukichi","Kang Youwei","Sun Yat-sen","Han Yongun","Hu Shih","Mao Zedong"]);
 const state={q:"",key:true,tr:{w:true,n:true,c:true},sh:{t:true,i:true}};
 try{const s=JSON.parse(localStorage.getItem("pt-state")||"null");if(s){state.tr=s.tr||state.tr;state.sh=s.sh||state.sh;}}catch(e){}
