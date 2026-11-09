@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World Philosophy Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: era rows down the page, three tradition columns across; sticky control bar; stacks to one column on phones */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#18202E; --muted:#5B6578; --line:#D9DEE7;
+  --accent:#2D4A7A;
+  --p-bg:#E3EDF9; --p-fg:#173E6E;
+  --t-bg:#FBEBD2; --t-fg:#6A3F08;
+  --i-bg:#DDF2EA; --i-fg:#0A5340;
+  --mark:#FFE07A;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11151C; --surface:#1A1F29; --ink:#E6EAF2; --muted:#98A2B5; --line:#2C3340; --accent:#9DB8E8;
+  --p-bg:#1C3657; --p-fg:#D6E6FA; --t-bg:#4E3410; --t-fg:#FBE6C4; --i-bg:#0F4436; --i-fg:#CFF0E4; --mark:#8A6A00; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151C; --surface:#1A1F29; --ink:#E6EAF2; --muted:#98A2B5; --line:#2C3340; --accent:#9DB8E8;
+  --p-bg:#1C3657; --p-fg:#D6E6FA; --t-bg:#4E3410; --t-fg:#FBE6C4; --i-bg:#0F4436; --i-fg:#CFF0E4; --mark:#8A6A00; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1240px;margin:0 auto}
+header{padding-block:40px 20px;display:grid;gap:10px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,52px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{max-width:62ch;color:var(--muted);margin:0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:12px;display:grid;gap:10px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.search{flex:1 1 240px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0 10px}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;padding:9px 0;outline:none}
+.search:focus-within{border-color:var(--accent)}
+.clear{border:0;background:none;color:var(--muted);font:inherit;cursor:pointer;padding:4px}
+.grp{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.grp-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.tog{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:5px 12px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.tog[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.tog .sw{width:10px;height:10px;border-radius:3px}
+.tog:focus-visible,.chip:focus-visible,.era-nav a:focus-visible,.search input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.era-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.era-nav a{flex:none;font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px}
+.era-nav a:hover{color:var(--ink);background:var(--surface)}
+.count{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto}
+.cols{display:grid;grid-template-columns:150px repeat(3,minmax(0,1fr));gap:14px;padding-top:18px}
+.colhead{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:4px}
+.era{display:contents}
+.era-label{border-top:1px solid var(--line);padding-top:14px;scroll-margin-top:150px}
+.era-label h2{font-family:var(--f-display);font-weight:400;font-size:20px;margin:0;line-height:1.15;text-wrap:balance}
+.era-label .yrs{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cell{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cell-label{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:7px}
+.card-top{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;justify-content:space-between}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font:inherit;font-size:13px;line-height:1.3;border:0;border-radius:6px;padding:3px 7px;cursor:pointer;text-align:left}
+.chip.p{background:var(--p-bg);color:var(--p-fg);font-weight:700;font-size:14px}
+.chip.t{background:var(--t-bg);color:var(--t-fg);font-style:italic}
+.chip.i{background:var(--i-bg);color:var(--i-fg)}
+.chip{text-decoration:none;display:inline-block}
+.chip:hover{text-decoration:underline;text-underline-offset:2px}
+.date{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.empty-cell{font-size:13px;color:var(--muted);font-style:italic}
+mark{background:var(--mark);color:inherit;border-radius:2px}
+.hide-t .chip.t,.hide-i .chip.i{display:none}
+.nores{padding:40px 0;color:var(--muted);text-align:center}
+footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
+@media (max-width:760px){
+  .cols{grid-template-columns:minmax(0,1fr);gap:8px}
+  .colhead{display:none}
+  .era-label{padding-top:22px}
+  .cell{border-top:0;padding-top:4px}
+  .cell-label{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .count{margin-left:0}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">c. 800 BCE → present · three traditions</div>
+  <h1>World Philosophy Timeline</h1>
+  <p class="lede">The key thinkers of Greece, India and China, era by era, with the texts they left and the ideas they are known for. Search or filter, and tap any person, text or idea to open it on Wikipedia.</p>
+</header>
+
+<div class="bar" id="bar">
+  <div class="row">
+    <label class="search" for="q"><span aria-hidden="true" style="color:var(--muted)">⌕</span>
+      <input id="q" type="search" placeholder="Search a name, text or idea (try “karma”, “Republic”, “Dao”)" autocomplete="off">
+      <button class="clear" id="clear" type="button" aria-label="Clear search" hidden>✕</button>
+    </label>
+  </div>
+  <div class="row">
+    <div class="grp" role="group" aria-label="Traditions">
+      <span class="grp-label">Traditions</span>
+      <button class="tog" id="tr-w" type="button" data-tr="w" aria-pressed="true">Greek &amp; Western</button>
+      <button class="tog" id="tr-n" type="button" data-tr="n" aria-pressed="true">Indian</button>
+      <button class="tog" id="tr-c" type="button" data-tr="c" aria-pressed="true">Chinese &amp; East Asian</button>
+    </div>
+    <div class="grp" role="group" aria-label="Show">
+      <span class="grp-label">Show</span>
+      <button class="tog" id="sh-t" type="button" data-sh="t" aria-pressed="true"><span class="sw" style="background:var(--t-bg);border:1px solid var(--t-fg)"></span>Texts</button>
+      <button class="tog" id="sh-i" type="button" data-sh="i" aria-pressed="true"><span class="sw" style="background:var(--i-bg);border:1px solid var(--i-fg)"></span>Ideas</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+  <nav class="era-nav" id="nav" aria-label="Jump to era"></nav>
+</div>
+
+<main class="cols" id="grid"></main>
+<p class="nores" id="nores" hidden>No thinkers match that search. Try a broader term or turn traditions back on.</p>
+
+<footer>This is an editorial selection of the thinkers and texts most widely taught and cited in each tradition. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Islamic and Jewish thinkers of the medieval period are placed in the Western column because they worked in the Greek philosophical lineage.</footer>
+</div>
+
+<script>
+const ERAS=[
+ ["early","Early antiquity","c. 1500–500 BCE"],
+ ["axial","Axial age","c. 500–300 BCE"],
+ ["classical","Hellenistic & classical","c. 300 BCE–500 CE"],
+ ["medieval","Medieval","c. 500–1400"],
+ ["earlymodern","Early modern","c. 1400–1800"],
+ ["modern","Modern","c. 1800–1950"],
+ ["contemporary","Contemporary","c. 1950–present"]];
+const TR={w:"Greek & Western",n:"Indian",c:"Chinese & East Asian"};
+// [era, tradition, person (or "" for anonymous text), dates, texts, ideas]
+const D=[
+["early","w","Thales","c. 624–546 BCE",[],["Water as first principle"]],
+["early","w","Anaximander","c. 610–546 BCE",["On Nature"],["The apeiron (boundless)"]],
+["early","w","Pythagoras","c. 570–495 BCE",[],["Reality is number","Transmigration of souls"]],
+["early","w","Heraclitus","c. 535–475 BCE",["Fragments"],["Flux","Logos"]],
+["early","n","","c. 1500–1200 BCE",["Rigveda"],["Rta (cosmic order)"]],
+["early","n","Yajnavalkya","c. 8th c. BCE",["Brihadaranyaka Upanishad"],["Atman = Brahman","Neti neti"]],
+["early","n","Uddalaka Aruni","c. 8th c. BCE",["Chandogya Upanishad"],["Tat tvam asi"]],
+["early","n","Kapila","traditional",[],["Samkhya: purusha & prakriti"]],
+["early","c","","c. 1000–750 BCE",["I Ching"],["Yin and yang","Change"]],
+["early","c","Laozi","trad. 6th c. BCE",["Daodejing"],["Dao","Wu wei"]],
+
+["axial","w","Parmenides","c. 515–450 BCE",["On Nature"],["Change is illusion"]],
+["axial","w","Zeno of Elea","c. 490–430 BCE",[],["Paradoxes of motion"]],
+["axial","w","Protagoras","c. 490–420 BCE",[],["Man is the measure","Relativism"]],
+["axial","w","Democritus","c. 460–370 BCE",[],["Atomism"]],
+["axial","w","Socrates","469–399 BCE",[],["Socratic method","The unexamined life"]],
+["axial","w","Plato","c. 428–348 BCE",["Republic","Symposium","Phaedo"],["Theory of forms","Allegory of the cave","Philosopher-king"]],
+["axial","w","Diogenes","c. 412–323 BCE",[],["Cynicism"]],
+["axial","w","Aristotle","384–322 BCE",["Nicomachean Ethics","Politics","Metaphysics"],["Golden mean","Syllogistic logic","Four causes","Eudaimonia"]],
+["axial","n","Mahavira","c. 599–527 BCE",["Agamas"],["Ahimsa","Anekantavada","Karma"]],
+["axial","n","Gautama Buddha","c. 563–483 BCE",["Pali Canon","Dhammapada"],["Four Noble Truths","Anatta (no-self)","Middle way","Karma"]],
+["axial","n","Ajita Kesakambali","c. 6th c. BCE",[],["Charvaka materialism"]],
+["axial","n","Panini","c. 4th c. BCE",["Ashtadhyayi"],["Formal grammar"]],
+["axial","c","Confucius","551–479 BCE",["Analects"],["Ren (humaneness)","Li (ritual)","Junzi"]],
+["axial","c","Sunzi","c. 544–496 BCE",["The Art of War"],["Winning without fighting"]],
+["axial","c","Mozi","c. 470–391 BCE",["Mozi"],["Jian ai (impartial care)"]],
+["axial","c","Mencius","c. 372–289 BCE",["Mencius"],["Human nature is good","Mandate of heaven"]],
+["axial","c","Zhuangzi","c. 369–286 BCE",["Zhuangzi"],["Butterfly dream","Spontaneity","Dao"]],
+
+["classical","w","Epicurus","341–270 BCE",["Letter to Menoeceus"],["Ataraxia"]],
+["classical","w","Zeno of Citium","c. 334–262 BCE",[],["Stoicism","Live according to nature"]],
+["classical","w","Pyrrho","c. 360–270 BCE",[],["Skepticism","Suspension of judgment"]],
+["classical","w","Seneca","c. 4 BCE–65 CE",["Letters to Lucilius"],["Stoicism"]],
+["classical","w","Epictetus","c. 50–135",["Enchiridion"],["Dichotomy of control","Stoicism"]],
+["classical","w","Marcus Aurelius","121–180",["Meditations"],["Stoicism"]],
+["classical","w","Plotinus","204–270",["Enneads"],["The One","Neoplatonism"]],
+["classical","w","Augustine","354–430",["Confessions","City of God"],["Original sin","Just war"]],
+["classical","n","Chanakya","c. 375–283 BCE",["Arthashastra"],["Statecraft"]],
+["classical","n","","c. 2nd c. BCE",["Bhagavad Gita"],["Nishkama karma","Dharma"]],
+["classical","n","Patanjali","c. 2nd c. BCE",["Yoga Sutras"],["Eight limbs of yoga"]],
+["classical","n","Gautama (Akshapada)","c. 2nd c. BCE",["Nyaya Sutras"],["Pramanas (means of knowledge)"]],
+["classical","n","Nagarjuna","c. 150–250",["Mulamadhyamakakarika"],["Shunyata (emptiness)","Two truths"]],
+["classical","n","Thiruvalluvar","c. 1st–5th c.",["Tirukkural"],["Virtue, wealth, love"]],
+["classical","n","Vasubandhu","c. 4th c.",["Abhidharmakosha"],["Mind-only (Yogacara)"]],
+["classical","c","Xunzi","c. 310–235 BCE",["Xunzi"],["Human nature is bad"]],
+["classical","c","Han Feizi","c. 280–233 BCE",["Han Feizi"],["Legalism","Rule by law"]],
+["classical","c","Wang Chong","27–c. 97",["Lunheng"],["Naturalist skepticism"]],
+
+["medieval","w","Boethius","c. 477–524",["Consolation of Philosophy"],["Wheel of fortune"]],
+["medieval","w","Al-Kindi","c. 801–873",["On First Philosophy"],["Harmony of faith and reason"]],
+["medieval","w","Al-Farabi","c. 872–950",["The Virtuous City"],["Philosopher-ruler"]],
+["medieval","w","Avicenna (Ibn Sina)","980–1037",["Book of Healing"],["Floating man","Necessary existent"]],
+["medieval","w","Anselm","1033–1109",["Proslogion"],["Ontological argument"]],
+["medieval","w","Al-Ghazali","1058–1111",["Incoherence of the Philosophers"],["Occasionalism"]],
+["medieval","w","Averroes (Ibn Rushd)","1126–1198",["Incoherence of the Incoherence"],["Harmony of faith and reason"]],
+["medieval","w","Maimonides","1138–1204",["Guide for the Perplexed"],["Negative theology"]],
+["medieval","w","Thomas Aquinas","1225–1274",["Summa Theologica"],["Five ways","Natural law"]],
+["medieval","w","William of Ockham","c. 1287–1347",[],["Ockham's razor","Nominalism"]],
+["medieval","w","Ibn Khaldun","1332–1406",["Muqaddimah"],["Asabiyyah (social cohesion)"]],
+["medieval","n","Dignaga & Dharmakirti","c. 5th–7th c.",["Pramanavarttika"],["Buddhist epistemology"]],
+["medieval","n","Shantideva","c. 8th c.",["Bodhicaryavatara"],["Bodhisattva ideal"]],
+["medieval","n","Adi Shankara","c. 788–820",["Brahma Sutra Bhashya"],["Advaita (non-dualism)","Maya"]],
+["medieval","n","Abhinavagupta","c. 950–1016",["Tantraloka"],["Rasa aesthetics"]],
+["medieval","n","Ramanuja","1017–1137",["Sri Bhashya"],["Qualified non-dualism"]],
+["medieval","n","Madhva","1238–1317",[],["Dvaita (dualism)"]],
+["medieval","c","Huineng","638–713",["Platform Sutra"],["Sudden enlightenment"]],
+["medieval","c","Linji","d. 866",[],["Koan practice"]],
+["medieval","c","Zhu Xi","1130–1200",["Four Books commentaries"],["Li and qi","Investigation of things"]],
+["medieval","c","Dogen","1200–1253",["Shobogenzo"],["Shikantaza (just sitting)"]],
+
+["earlymodern","w","Machiavelli","1469–1527",["The Prince"],["Realpolitik"]],
+["earlymodern","w","Montaigne","1533–1592",["Essays"],["Skepticism"]],
+["earlymodern","w","Francis Bacon","1561–1626",["Novum Organum"],["Scientific method"]],
+["earlymodern","w","Hobbes","1588–1679",["Leviathan"],["Social contract","State of nature"]],
+["earlymodern","w","Descartes","1596–1650",["Meditations on First Philosophy"],["Cogito ergo sum","Mind–body dualism"]],
+["earlymodern","w","Pascal","1623–1662",["Pensées"],["Pascal's wager"]],
+["earlymodern","w","Spinoza","1632–1677",["Ethics"],["God or Nature"]],
+["earlymodern","w","Locke","1632–1704",["Two Treatises of Government","Essay Concerning Human Understanding"],["Tabula rasa","Natural rights","Social contract"]],
+["earlymodern","w","Leibniz","1646–1716",["Monadology"],["Best of all possible worlds"]],
+["earlymodern","w","Berkeley","1685–1753",[],["To be is to be perceived"]],
+["earlymodern","w","Hume","1711–1776",["A Treatise of Human Nature"],["Problem of induction","Is–ought gap","Skepticism"]],
+["earlymodern","w","Rousseau","1712–1778",["The Social Contract"],["General will","Social contract"]],
+["earlymodern","w","Adam Smith","1723–1790",["The Wealth of Nations"],["Invisible hand"]],
+["earlymodern","w","Kant","1724–1804",["Critique of Pure Reason","Groundwork of the Metaphysics of Morals"],["Categorical imperative","Synthetic a priori"]],
+["earlymodern","w","Mary Wollstonecraft","1759–1797",["A Vindication of the Rights of Woman"],["Equal education"]],
+["earlymodern","n","Gangesha","c. 14th c.",["Tattvacintamani"],["Navya-Nyaya logic"]],
+["earlymodern","n","Kabir","c. 1440–1518",["Bijak"],["Nirguna bhakti"]],
+["earlymodern","n","Guru Nanak","1469–1539",["Hymns in the Guru Granth Sahib"],["Ik Onkar"]],
+["earlymodern","n","Madhusudana Sarasvati","c. 1540–1640",["Advaitasiddhi"],["Advaita (non-dualism)"]],
+["earlymodern","c","Wang Yangming","1472–1529",["Instructions for Practical Living"],["Unity of knowing and acting"]],
+["earlymodern","c","Huang Zongxi","1610–1695",["Waiting for the Dawn"],["Critique of absolutism"]],
+["earlymodern","c","Motoori Norinaga","1730–1801",[],["Mono no aware"]],
+
+["modern","w","Hegel","1770–1831",["Phenomenology of Spirit"],["Dialectic","Geist"]],
+["modern","w","Schopenhauer","1788–1860",["The World as Will and Representation"],["The will"]],
+["modern","w","J. S. Mill","1806–1873",["On Liberty","Utilitarianism"],["Harm principle","Utilitarianism"]],
+["modern","w","Kierkegaard","1813–1855",["Fear and Trembling"],["Leap of faith"]],
+["modern","w","Marx","1818–1883",["The Communist Manifesto","Capital"],["Historical materialism","Alienation"]],
+["modern","w","Nietzsche","1844–1900",["Thus Spoke Zarathustra","Beyond Good and Evil"],["Übermensch","God is dead","Eternal recurrence"]],
+["modern","w","William James","1842–1910",["Pragmatism"],["Pragmatism"]],
+["modern","w","Husserl","1859–1938",["Logical Investigations"],["Phenomenology"]],
+["modern","w","Russell","1872–1970",["Principia Mathematica"],["Logical analysis"]],
+["modern","w","Wittgenstein","1889–1951",["Tractatus Logico-Philosophicus","Philosophical Investigations"],["Language games"]],
+["modern","w","Heidegger","1889–1976",["Being and Time"],["Dasein"]],
+["modern","n","Ram Mohan Roy","1772–1833",[],["Rational religious reform"]],
+["modern","n","Swami Vivekananda","1863–1902",["Raja Yoga"],["Practical Vedanta"]],
+["modern","n","Rabindranath Tagore","1861–1941",["Sadhana","Nationalism"],["Universal humanism"]],
+["modern","n","Mahatma Gandhi","1869–1948",["Hind Swaraj"],["Satyagraha","Swaraj","Ahimsa"]],
+["modern","n","Sri Aurobindo","1872–1950",["The Life Divine"],["Integral yoga"]],
+["modern","n","K. C. Bhattacharya","1875–1949",["Swaraj in Ideas"],["Decolonizing the mind"]],
+["modern","c","Nishida Kitaro","1870–1945",["An Inquiry into the Good"],["Pure experience","Basho (place)"]],
+["modern","c","Watsuji Tetsuro","1889–1960",["Fudo (Climate and Culture)"],["Betweenness"]],
+["modern","c","Hu Shih","1891–1962",[],["Chinese pragmatism","Pragmatism"]],
+["modern","c","Liang Shuming","1893–1988",[],["New Confucianism"]],
+
+["contemporary","w","Sartre","1905–1980",["Being and Nothingness"],["Existence precedes essence"]],
+["contemporary","w","Simone de Beauvoir","1908–1986",["The Second Sex"],["One becomes a woman"]],
+["contemporary","w","Hannah Arendt","1906–1975",["The Origins of Totalitarianism"],["Banality of evil"]],
+["contemporary","w","Camus","1913–1960",["The Myth of Sisyphus"],["The absurd"]],
+["contemporary","w","Thomas Kuhn","1922–1996",["The Structure of Scientific Revolutions"],["Paradigm shift"]],
+["contemporary","w","John Rawls","1921–2002",["A Theory of Justice"],["Veil of ignorance"]],
+["contemporary","w","Foucault","1926–1984",["Discipline and Punish"],["Power/knowledge"]],
+["contemporary","w","Peter Singer","b. 1946",["Animal Liberation"],["Effective altruism"]],
+["contemporary","n","B. R. Ambedkar","1891–1956",["Annihilation of Caste"],["Navayana Buddhism"]],
+["contemporary","n","J. Krishnamurti","1895–1986",["Freedom from the Known"],["Truth is a pathless land"]],
+["contemporary","n","B. K. Matilal","1935–1991",["Perception"],["Analytic Indian philosophy"]],
+["contemporary","n","Amartya Sen","b. 1933",["Development as Freedom","The Idea of Justice"],["Capability approach"]],
+["contemporary","c","Nishitani Keiji","1900–1990",["Religion and Nothingness"],["Shunyata (emptiness)"]],
+["contemporary","c","Mou Zongsan","1909–1995",[],["Moral metaphysics","New Confucianism"]],
+["contemporary","c","Tu Weiming","b. 1940",[],["Confucian humanism"]]
+];
+
+// Key figures: the most widely taught and cited thinkers (anonymous texts keyed by title)
+const KEY=new Set(["Pythagoras","Heraclitus","Socrates","Plato","Aristotle","Epicurus","Marcus Aurelius","Augustine","Avicenna (Ibn Sina)","Thomas Aquinas","Machiavelli","Hobbes","Descartes","Spinoza","Locke","Hume","Rousseau","Kant","Hegel","J. S. Mill","Marx","Nietzsche","Wittgenstein","Sartre","Simone de Beauvoir","John Rawls",
+"Rigveda","Yajnavalkya","Mahavira","Gautama Buddha","Chanakya","Bhagavad Gita","Patanjali","Nagarjuna","Adi Shankara","Ramanuja","Swami Vivekananda","Mahatma Gandhi","B. R. Ambedkar",
+"I Ching","Laozi","Confucius","Sunzi","Mencius","Zhuangzi","Han Feizi","Huineng","Zhu Xi","Dogen","Wang Yangming","Nishida Kitaro","Mou Zongsan"]);
+const state={q:"",key:true,tr:{w:true,n:true,c:true},sh:{t:true,i:true}};
+try{const s=JSON.parse(localStorage.getItem("pt-state")||"null");if(s){state.tr=s.tr||state.tr;state.sh=s.sh||state.sh;}}catch(e){}
+const save=()=>{try{localStorage.setItem("pt-state",JSON.stringify({tr:state.tr,sh:state.sh}))}catch(e){}};
+
+const $=s=>document.querySelector(s), grid=$("#grid");
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+function hl(s){const t=esc(s);if(!state.q)return t;const q=norm(state.q);const n=norm(s);const i=n.indexOf(q);if(i<0)return t;
+  return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length));}
+function matches(d){if(state.key&&!KEY.has(d[2]||d[4][0]))return false;if(!state.q)return true;const q=norm(state.q);
+  const pool=[d[2],...(state.sh.t?d[4]:[]),...(state.sh.i?d[5]:[])];if(!state.sh.t&&!d[2])pool.push(...d[4]);
+  return pool.some(x=>norm(x).includes(q));}
+// Chip label -> Wikipedia article title (only where they differ). "t:" prefix = text-specific.
+const W={"Transmigration of souls":"Metempsychosis","Reality is number":"Pythagoreanism","Fragments":"Heraclitus","Flux":"Panta rhei",
+"The unexamined life":"The unexamined life is not worth living","Republic":"Republic (Plato)","Symposium":"Symposium (Plato)","Theory of forms":"Theory of forms","Philosopher-king":"Philosopher king",
+"Politics":"Politics (Aristotle)","Metaphysics":"Metaphysics (Aristotle)","Golden mean":"Golden mean (philosophy)","Syllogistic logic":"Syllogism",
+"Augustine":"Augustine of Hippo","Confessions":"Confessions (Augustine)","City of God":"The City of God","Just war":"Just war theory",
+"Avicenna (Ibn Sina)":"Avicenna","Book of Healing":"The Book of Healing","Floating man":"Floating man","Necessary existent":"Proof of the Truthful",
+"Five ways":"Five Ways (Aquinas)","Machiavelli":"Niccolò Machiavelli","Hobbes":"Thomas Hobbes","Leviathan":"Leviathan (Hobbes book)",
+"Descartes":"René Descartes","Mind–body dualism":"Mind–body dualism","Spinoza":"Baruch Spinoza","Ethics":"Ethics (Spinoza book)","God or Nature":"Deus sive Natura",
+"Locke":"John Locke","Essay Concerning Human Understanding":"An Essay Concerning Human Understanding","Natural rights":"Natural rights and legal rights",
+"Hume":"David Hume","Is–ought gap":"Is–ought problem","Skepticism":"Philosophical skepticism","Rousseau":"Jean-Jacques Rousseau",
+"Kant":"Immanuel Kant","Synthetic a priori":"Analytic–synthetic distinction","Hegel":"Georg Wilhelm Friedrich Hegel","Phenomenology of Spirit":"The Phenomenology of Spirit",
+"J. S. Mill":"John Stuart Mill","t:Utilitarianism":"Utilitarianism (book)","Marx":"Karl Marx","Capital":"Das Kapital","Alienation":"Marx's theory of alienation",
+"Nietzsche":"Friedrich Nietzsche","Eternal recurrence":"Eternal return","Wittgenstein":"Ludwig Wittgenstein","Language games":"Language game (philosophy)",
+"Sartre":"Jean-Paul Sartre","One becomes a woman":"The Second Sex","Veil of ignorance":"Original position",
+"Rta (cosmic order)":"Ṛta","Atman = Brahman":"Ātman (Hinduism)","Agamas":"Jain Agamas","Anatta (no-self)":"Anattā","Statecraft":"Arthashastra",
+"Yoga Sutras":"Yoga Sutras of Patanjali","Shunyata (emptiness)":"Śūnyatā","Two truths":"Two truths doctrine","Advaita (non-dualism)":"Advaita Vedanta","Maya":"Maya (religion)",
+"Qualified non-dualism":"Vishishtadvaita","Raja Yoga":"Raja Yoga (book)","Practical Vedanta":"Swami Vivekananda","Navayana Buddhism":"Navayana",
+"Change":"I Ching","Daodejing":"Tao Te Ching","Dao":"Tao","Ren (humaneness)":"Ren (philosophy)","Li (ritual)":"Li (Confucianism)",
+"Sunzi":"Sun Tzu","Winning without fighting":"The Art of War","t:Mencius":"Mencius (book)","Human nature is good":"Mencius","t:Zhuangzi":"Zhuangzi (book)","Butterfly dream":"Zhuangzi (book)","Spontaneity":"Ziran",
+"Han Feizi":"Han Fei","t:Han Feizi":"Han Feizi","Legalism":"Legalism (Chinese philosophy)","Rule by law":"Legalism (Chinese philosophy)",
+"Sudden enlightenment":"Subitism","Four Books commentaries":"Four Books and Five Classics","Li and qi":"Neo-Confucianism","Investigation of things":"Gewu",
+"Dogen":"Dōgen","Shobogenzo":"Shōbōgenzō","Shikantaza (just sitting)":"Shikantaza","Instructions for Practical Living":"Wang Yangming","Unity of knowing and acting":"Unity of knowledge and action",
+"Nishida Kitaro":"Kitaro Nishida","Pure experience":"Kitaro Nishida","Basho (place)":"Kitaro Nishida","Moral metaphysics":"Mou Zongsan","Brahma Sutra Bhashya":"Adi Shankara","Sri Bhashya":"Sri Bhashya","Eight limbs of yoga":"Ashtanga (eight limbs of yoga)","Nishkama karma":"Nishkama Karma"};
+function wiki(kind,label){const t=W[kind+":"+label]||W[label];
+  return t?"https://en.wikipedia.org/wiki/"+encodeURIComponent(t.replace(/ /g,"_")):"https://en.wikipedia.org/w/index.php?search="+encodeURIComponent(label.replace(/\s*\(.*?\)/,""));}
+const chip=(cls,label,kind)=>`<a class="chip ${cls}" href="${wiki(cls,label)}" target="_blank" rel="noopener" title="Open “${esc(label)}” on Wikipedia">${hl(label)}</a>`;
+
+$("#nav").innerHTML=ERAS.map(e=>`<a href="#${e[0]}">${esc(e[1])}</a>`).join("");
+
+function render(){
+  const trs=Object.keys(TR).filter(k=>state.tr[k]);
+  grid.style.gridTemplateColumns=window.matchMedia("(max-width:760px)").matches?"":`150px repeat(${Math.max(trs.length,1)},minmax(0,1fr))`;
+  grid.className="cols"+(state.sh.t?"":" hide-t")+(state.sh.i?"":" hide-i");
+  let html=`<div></div>`+trs.map(k=>`<div class="colhead">${TR[k]}</div>`).join("");
+  let shown=0,anyEra=false;
+  for(const [id,name,yrs] of ERAS){
+    const cells=trs.map(k=>D.filter(d=>d[0]===id&&d[1]===k&&matches(d)));
+    const total=cells.reduce((a,c)=>a+c.length,0);
+    if(state.q&&!total)continue;
+    anyEra=true;shown+=cells.reduce((a,c)=>a+c.filter(d=>d[2]).length,0);
+    html+=`<section class="era" aria-labelledby="h-${id}"><div class="era-label" id="${id}"><h2 id="h-${id}">${esc(name)}</h2><div class="yrs">${esc(yrs)}</div></div>`;
+    html+=cells.map((list,ci)=>`<div class="cell"><div class="cell-label">${TR[trs[ci]]}</div>`+
+      (list.length?list.map(d=>`<article class="card"><div class="card-top">${d[2]?chip("p",d[2],"person"):d[4].map(t=>chip("t",t,"text").replace('class="chip t"','class="chip t" style="display:inline-block"')).join("")}<span class="date">${esc(d[3])}</span></div>`+
+        `<div class="chips">${d[2]?d[4].map(t=>chip("t",t,"text")).join(""):""}${d[5].map(t=>chip("i",t,"idea")).join("")}</div></article>`).join("")
+        :`<div class="empty-cell">${state.q?"No matches":"—"}</div>`)+`</div>`).join("");
+    html+=`</section>`;
+  }
+  grid.innerHTML=html;
+  $("#nores").hidden=anyEra;
+  $("#count").textContent=`${shown} thinker${shown===1?"":"s"}`;
+  $("#clear").hidden=!state.q;
+  document.querySelectorAll("[data-tr]").forEach(b=>b.setAttribute("aria-pressed",state.tr[b.dataset.tr]));
+  document.querySelectorAll("[data-sh]").forEach(b=>b.setAttribute("aria-pressed",state.sh[b.dataset.sh]));
+}
+
+$("#q").addEventListener("input",e=>{state.q=e.target.value.trim();render();});
+$("#clear").addEventListener("click",()=>{$("#q").value="";state.q="";render();$("#q").focus();});
+document.querySelectorAll("[data-tr]").forEach(b=>b.addEventListener("click",()=>{
+  const k=b.dataset.tr;const on=Object.values(state.tr).filter(Boolean).length;
+  if(state.tr[k]&&on===1)return; state.tr[k]=!state.tr[k];save();render();}));
+document.querySelectorAll("[data-sh]").forEach(b=>b.addEventListener("click",()=>{state.sh[b.dataset.sh]=!state.sh[b.dataset.sh];save();render();}));
+
+window.addEventListener("resize",()=>{clearTimeout(window._r);window._r=setTimeout(render,120);});
+render();
+if(location.hash){const el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView();}
+</script>
+</body>
+</html>
