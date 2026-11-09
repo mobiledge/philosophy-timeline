@@ -124,7 +124,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
 <main class="cols" id="grid"></main>
 <p class="nores" id="nores" hidden>No thinkers match that search. Try a broader term or turn traditions back on.</p>
 
-<footer>This is an editorial selection of the thinkers and texts most widely taught and cited in each tradition. Texts marked “compiled” were assembled by disciples or later followers; “attrib.” marks traditional attributions that modern scholars doubt. “trad.” marks traditional dates. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Islamic and Jewish thinkers of the medieval period are placed in the Western column because they worked in the Greek philosophical lineage.</footer>
+<footer>The Greek &amp; Western column follows the figures covered in Daniel N. Robinson’s course <i>The Great Ideas of Philosophy</i> (2nd ed.), which includes historians, scientists and political writers who shaped Western thought; the Indian and Chinese columns are an editorial selection of the most widely taught thinkers. Texts marked “compiled” were assembled by disciples or later followers; “attrib.” marks traditional attributions that modern scholars doubt. “trad.” marks traditional dates. Dates before about 300 CE are approximate, and some early figures (Kapila, Laozi, Yajnavalkya) are traditional attributions whose historical existence is debated. Entries in amber with no person attached are anonymous or collective texts. Islamic and Jewish thinkers of the medieval period are placed in the Western column because they worked in the Greek philosophical lineage.</footer>
 </div>
 
 <script>
@@ -139,6 +139,7 @@ const ERAS=[
 const TR={w:"Greek & Western",n:"Indian",c:"Chinese & East Asian"};
 // [era, tradition, person (or "" for anonymous text), dates, texts, ideas]
 const D=[
+["early","w","Homer","c. 8th c. BCE",["Iliad","Odyssey"],["Arete (excellence)","Heroic fate"]],
 ["early","w","Thales","c. 624–546 BCE",[],["Water as first principle"]],
 ["early","w","Anaximander","c. 610–546 BCE",["On Nature"],["The apeiron (boundless)"]],
 ["early","w","Pythagoras","c. 570–495 BCE",[],["All is number (Pythagorean)","Transmigration of souls"]],
@@ -151,10 +152,13 @@ const D=[
 ["early","c","Laozi","trad. 6th c. BCE",["Daodejing (attrib.; c. 4th c. BCE)"],["Dao","Wu wei"]],
 
 ["axial","w","Parmenides","c. 515–450 BCE",["On Nature"],["Change is illusion"]],
+["axial","w","Sophocles","c. 497–406 BCE",["Oedipus Rex","Antigone"],["Tragic fate","Divine vs. human law"]],
+["axial","w","Herodotus","c. 484–425 BCE",["Histories"],["History as inquiry"]],
 ["axial","w","Zeno of Elea","c. 490–430 BCE",[],["Paradoxes of motion"]],
 ["axial","w","Protagoras","c. 490–420 BCE",[],["Man is the measure","Relativism"]],
 ["axial","w","Democritus","c. 460–370 BCE",[],["Atomism"]],
 ["axial","w","Socrates","469–399 BCE",[],["Socratic method","The unexamined life"]],
+["axial","w","Hippocrates","c. 460–370 BCE",["Hippocratic Corpus (attrib.)"],["Natural causes of disease","Hippocratic Oath"]],
 ["axial","w","Plato","c. 428–348 BCE",["Republic","Symposium","Phaedo"],["Theory of forms","Allegory of the cave","Philosopher-king"]],
 ["axial","w","Diogenes","c. 412–323 BCE",[],["Cynicism"]],
 ["axial","w","Aristotle","384–322 BCE",["Nicomachean Ethics","Politics","Metaphysics"],["Golden mean","Syllogistic logic","Four causes","Eudaimonia"]],
@@ -171,6 +175,7 @@ const D=[
 ["classical","w","Epicurus","341–270 BCE",["Letter to Menoeceus"],["Ataraxia"]],
 ["classical","w","Zeno of Citium","c. 334–262 BCE",[],["Stoicism","Live according to nature"]],
 ["classical","w","Pyrrho","c. 360–270 BCE",[],["Skepticism","Suspension of judgment"]],
+["classical","w","Cicero","106–43 BCE",["On the Republic","On the Laws"],["Natural law","Rule of law"]],
 ["classical","w","Seneca","c. 4 BCE–65 CE",["Letters to Lucilius"],["Stoicism"]],
 ["classical","w","Epictetus","c. 50–135",["Enchiridion"],["Dichotomy of control","Stoicism"]],
 ["classical","w","Marcus Aurelius","121–180",["Meditations"],["Stoicism"]],
@@ -195,6 +200,7 @@ const D=[
 ["medieval","w","Al-Ghazali","1058–1111",["Incoherence of the Philosophers"],["Occasionalism"]],
 ["medieval","w","Averroes (Ibn Rushd)","1126–1198",["Incoherence of the Incoherence"],["Harmony of faith and reason"]],
 ["medieval","w","Maimonides","1138–1204",["Guide for the Perplexed"],["Negative theology"]],
+["medieval","w","Roger Bacon","c. 1219–1292",["Opus Majus"],["Experimental science"]],
 ["medieval","w","Thomas Aquinas","1225–1274",["Summa Theologica"],["Five ways","Natural law"]],
 ["medieval","w","William of Ockham","c. 1287–1347",[],["Ockham's razor","Nominalism"]],
 ["medieval","w","Ibn Khaldun","1332–1406",["Muqaddimah"],["Asabiyyah (social cohesion)"]],
@@ -209,6 +215,7 @@ const D=[
 ["medieval","c","Zhu Xi","1130–1200",["Four Books commentaries"],["Li and qi","Investigation of things"]],
 ["medieval","c","Dogen","1200–1253",["Shobogenzo"],["Shikantaza (just sitting)"]],
 
+["earlymodern","w","Pico della Mirandola","1463–1494",["Oration on the Dignity of Man"],["Renaissance humanism"]],
 ["earlymodern","w","Machiavelli","1469–1527",["The Prince"],["Virtù and fortuna"]],
 ["earlymodern","w","Montaigne","1533–1592",["Essays"],["Skepticism"]],
 ["earlymodern","w","Francis Bacon","1561–1626",["Novum Organum"],["Scientific method"]],
@@ -217,12 +224,17 @@ const D=[
 ["earlymodern","w","Pascal","1623–1662",["Pensées"],["Pascal's wager"]],
 ["earlymodern","w","Spinoza","1632–1677",["Ethics"],["God or Nature"]],
 ["earlymodern","w","Locke","1632–1704",["Two Treatises of Government","Essay Concerning Human Understanding"],["Tabula rasa","Natural rights","Social contract"]],
+["earlymodern","w","Newton","1643–1727",["Principia"],["Laws of motion","Universal gravitation"]],
 ["earlymodern","w","Leibniz","1646–1716",["Monadology"],["Best of all possible worlds"]],
 ["earlymodern","w","Berkeley","1685–1753",[],["To be is to be perceived"]],
+["earlymodern","w","Voltaire","1694–1778",["Candide","Letters on the English"],["Religious tolerance"]],
+["earlymodern","w","La Mettrie","1709–1751",["Man a Machine"],["Materialism"]],
+["earlymodern","w","Thomas Reid","1710–1796",["An Inquiry into the Human Mind"],["Common sense realism"]],
 ["earlymodern","w","Hume","1711–1776",["A Treatise of Human Nature"],["Problem of induction","Is–ought gap","Skepticism"]],
 ["earlymodern","w","Rousseau","1712–1778",["The Social Contract"],["General will","Social contract"]],
 ["earlymodern","w","Adam Smith","1723–1790",["The Wealth of Nations"],["Invisible hand"]],
 ["earlymodern","w","Kant","1724–1804",["Critique of Pure Reason","Groundwork of the Metaphysics of Morals"],["Categorical imperative","Synthetic a priori"]],
+["earlymodern","w","","1787–1788",["The Federalist Papers (Hamilton, Madison, Jay)"],["Separation of powers","Checks and balances"]],
 ["earlymodern","w","Mary Wollstonecraft","1759–1797",["A Vindication of the Rights of Woman"],["Equal education"]],
 ["earlymodern","n","Gangesha","c. 14th c.",["Tattvacintamani"],["Navya-Nyaya logic"]],
 ["earlymodern","n","Kabir","c. 1440–1518",["Bijak"],["Nirguna bhakti"]],
@@ -232,13 +244,16 @@ const D=[
 ["earlymodern","c","Huang Zongxi","1610–1695",["Waiting for the Dawn"],["Critique of absolutism"]],
 ["earlymodern","c","Motoori Norinaga","1730–1801",[],["Mono no aware"]],
 
+["modern","w","Gall","1758–1828",["Anatomy and Physiology of the Nervous System"],["Phrenology","Localization of brain function"]],
 ["modern","w","Hegel","1770–1831",["Phenomenology of Spirit"],["Dialectic","Geist"]],
 ["modern","w","Schopenhauer","1788–1860",["The World as Will and Representation"],["The will"]],
 ["modern","w","J. S. Mill","1806–1873",["On Liberty","Utilitarianism"],["Harm principle","Utilitarianism"]],
+["modern","w","Darwin","1809–1882",["On the Origin of Species","The Descent of Man"],["Natural selection"]],
 ["modern","w","Kierkegaard","1813–1855",["Fear and Trembling"],["Leap of faith"]],
 ["modern","w","Marx","1818–1883",["The Communist Manifesto (with Engels)","Capital"],["Historical materialism","Alienation"]],
 ["modern","w","Nietzsche","1844–1900",["Thus Spoke Zarathustra","Beyond Good and Evil"],["Übermensch","God is dead","Eternal recurrence"]],
-["modern","w","William James","1842–1910",["Pragmatism"],["Pragmatism"]],
+["modern","w","William James","1842–1910",["The Principles of Psychology","Pragmatism"],["Stream of consciousness","Pragmatism"]],
+["modern","w","Freud","1856–1939",["The Interpretation of Dreams","Civilization and Its Discontents"],["The unconscious","Psychoanalysis"]],
 ["modern","w","Husserl","1859–1938",["Logical Investigations"],["Phenomenology"]],
 ["modern","w","Russell","1872–1970",["Principia Mathematica"],["Logical analysis"]],
 ["modern","w","Wittgenstein","1889–1951",["Tractatus Logico-Philosophicus","Philosophical Investigations"],["Language games"]],
@@ -256,6 +271,7 @@ const D=[
 
 ["modern","w","Sartre","1905–1980",["Being and Nothingness"],["Existence precedes essence"]],
 ["modern","w","Simone de Beauvoir","1908–1986",["The Second Sex"],["One is not born, but becomes, a woman"]],
+["contemporary","w","Turing","1912–1954",["Computing Machinery and Intelligence"],["Turing test","Computability"]],
 ["contemporary","w","Hannah Arendt","1906–1975",["The Origins of Totalitarianism"],["Banality of evil"]],
 ["contemporary","w","Camus","1913–1960",["The Myth of Sisyphus"],["The absurd"]],
 ["contemporary","w","Thomas Kuhn","1922–1996",["The Structure of Scientific Revolutions"],["Paradigm shift"]],
@@ -272,7 +288,7 @@ const D=[
 ];
 
 // Key figures: the most widely taught and cited thinkers (anonymous texts keyed by title)
-const KEY=new Set(["Pythagoras","Heraclitus","Socrates","Plato","Aristotle","Epicurus","Marcus Aurelius","Augustine","Avicenna (Ibn Sina)","Thomas Aquinas","Machiavelli","Hobbes","Descartes","Spinoza","Locke","Hume","Rousseau","Kant","Hegel","J. S. Mill","Marx","Nietzsche","Wittgenstein","Sartre","Simone de Beauvoir","John Rawls",
+const KEY=new Set(["Homer","Pythagoras","Heraclitus","Parmenides","Sophocles","Herodotus","Socrates","Hippocrates","Plato","Aristotle","Cicero","Marcus Aurelius","Augustine","Avicenna (Ibn Sina)","Averroes (Ibn Rushd)","Roger Bacon","Thomas Aquinas","Pico della Mirandola","Francis Bacon","Descartes","Hobbes","Locke","Newton","Voltaire","La Mettrie","Hume","Thomas Reid","Rousseau","Kant","The Federalist Papers (Hamilton, Madison, Jay)","Gall","Hegel","Nietzsche","J. S. Mill","Darwin","Marx","William James","Freud","Wittgenstein","Turing",
 "Rigveda","Yajnavalkya","Mahavira","Gautama Buddha","Chanakya","Bhagavad Gita","Patanjali","Nagarjuna","Adi Shankara","Ramanuja","Swami Vivekananda","Mahatma Gandhi","B. R. Ambedkar",
 "I Ching","Laozi","Confucius","Sunzi","Mencius","Zhuangzi","Han Feizi","Huineng","Zhu Xi","Dogen","Wang Yangming","Nishida Kitaro","Mou Zongsan"]);
 const state={q:"",key:true,tr:{w:true,n:true,c:true},sh:{t:true,i:true}};
@@ -298,7 +314,7 @@ const W={"Transmigration of souls":"Metempsychosis","All is number (Pythagorean)
 "Locke":"John Locke","Essay Concerning Human Understanding":"An Essay Concerning Human Understanding","Natural rights":"Natural rights and legal rights",
 "Hume":"David Hume","Is–ought gap":"Is–ought problem","Skepticism":"Philosophical skepticism","Rousseau":"Jean-Jacques Rousseau",
 "Kant":"Immanuel Kant","Synthetic a priori":"Analytic–synthetic distinction","Hegel":"Georg Wilhelm Friedrich Hegel","Phenomenology of Spirit":"The Phenomenology of Spirit",
-"J. S. Mill":"John Stuart Mill","t:Utilitarianism":"Utilitarianism (book)","Marx":"Karl Marx","Capital":"Das Kapital","The Communist Manifesto (with Engels)":"The Communist Manifesto","Yin and yang (later commentaries)":"Yin and yang","Right to depose tyrants":"Mandate of Heaven","Virtù and fortuna":"Virtù","Analects (compiled)":"Analects","Pali Canon (compiled)":"Pali Canon","Dhammapada (compiled)":"Dhammapada","Platform Sutra (compiled)":"Platform Sutra","Principles of Philosophy":"Principles of Philosophy","Alienation":"Marx's theory of alienation",
+"J. S. Mill":"John Stuart Mill","t:Utilitarianism":"Utilitarianism (book)","Marx":"Karl Marx","Capital":"Das Kapital","On Nature":"On Nature (Parmenides)","Homer":"Homer","Iliad":"Iliad","Odyssey":"Odyssey","Arete (excellence)":"Arete","Heroic fate":"Moirai","Oedipus Rex":"Oedipus Rex","Antigone":"Antigone (Sophocles play)","Tragic fate":"Greek tragedy","Divine vs. human law":"Antigone (Sophocles play)","Histories":"Histories (Herodotus)","History as inquiry":"Herodotus","Hippocratic Corpus (attrib.)":"Hippocratic Corpus","Natural causes of disease":"Hippocrates","On the Republic":"De re publica","On the Laws":"De Legibus","Natural law":"Natural law","Rule of law":"Rule of law","Averroes (Ibn Rushd)":"Averroes","Roger Bacon":"Roger Bacon","Opus Majus":"Opus Majus","Experimental science":"Scientific method","Pico della Mirandola":"Giovanni Pico della Mirandola","Oration on the Dignity of Man":"Oration on the Dignity of Man","Renaissance humanism":"Renaissance humanism","Francis Bacon":"Francis Bacon","Newton":"Isaac Newton","Principia":"Philosophiæ Naturalis Principia Mathematica","Laws of motion":"Newton's laws of motion","Universal gravitation":"Newton's law of universal gravitation","Candide":"Candide","Letters on the English":"Letters on the English","Religious tolerance":"Toleration","La Mettrie":"Julien Offray de La Mettrie","Man a Machine":"Man a Machine","Materialism":"Materialism","Thomas Reid":"Thomas Reid","An Inquiry into the Human Mind":"An Inquiry into the Human Mind on the Principles of Common Sense","Common sense realism":"Scottish common sense realism","The Federalist Papers (Hamilton, Madison, Jay)":"The Federalist Papers","Separation of powers":"Separation of powers","Checks and balances":"Separation of powers","Gall":"Franz Joseph Gall","Anatomy and Physiology of the Nervous System":"Franz Joseph Gall","Phrenology":"Phrenology","Localization of brain function":"Functional specialization (brain)","Darwin":"Charles Darwin","On the Origin of Species":"On the Origin of Species","The Descent of Man":"The Descent of Man, and Selection in Relation to Sex","Natural selection":"Natural selection","William James":"William James","The Principles of Psychology":"The Principles of Psychology","Stream of consciousness":"Stream of consciousness (psychology)","t:Pragmatism":"William James","Pragmatism":"Pragmatism","Freud":"Sigmund Freud","The Interpretation of Dreams":"The Interpretation of Dreams","Civilization and Its Discontents":"Civilization and Its Discontents","The unconscious":"Unconscious mind","Psychoanalysis":"Psychoanalysis","Turing":"Alan Turing","Computing Machinery and Intelligence":"Computing Machinery and Intelligence","Turing test":"Turing test","Computability":"Computability","The Communist Manifesto (with Engels)":"The Communist Manifesto","Yin and yang (later commentaries)":"Yin and yang","Right to depose tyrants":"Mandate of Heaven","Virtù and fortuna":"Virtù","Analects (compiled)":"Analects","Pali Canon (compiled)":"Pali Canon","Dhammapada (compiled)":"Dhammapada","Platform Sutra (compiled)":"Platform Sutra","Principles of Philosophy":"Principles of Philosophy","Alienation":"Marx's theory of alienation",
 "Nietzsche":"Friedrich Nietzsche","Eternal recurrence":"Eternal return","Wittgenstein":"Ludwig Wittgenstein","Language games":"Language game (philosophy)",
 "Sartre":"Jean-Paul Sartre","One is not born, but becomes, a woman":"The Second Sex","Veil of ignorance":"Original position",
 "Rta (cosmic order)":"Ṛta","Atman = Brahman":"Ātman (Hinduism)","Agamas (compiled)":"Jain Agamas","Anatta (no-self)":"Anattā","Statecraft":"Arthashastra","Arthashastra (attrib.)":"Arthashastra",
@@ -308,7 +324,7 @@ const W={"Transmigration of souls":"Metempsychosis","All is number (Pythagorean)
 "Sunzi":"Sun Tzu","Winning without fighting":"The Art of War","The Art of War (attrib.)":"The Art of War","Mencius (compiled)":"Mencius (book)","Human nature is good":"Mencius","Zhuangzi":"Zhuang Zhou","Zhuangzi (inner chapters)":"Zhuangzi (book)","Butterfly dream":"Zhuangzi (book)","Spontaneity":"Ziran",
 "Han Feizi":"Han Fei","t:Han Feizi":"Han Feizi","Legalism":"Legalism (Chinese philosophy)","Rule by law":"Legalism (Chinese philosophy)",
 "Sudden enlightenment":"Subitism","Four Books commentaries":"Four Books and Five Classics","Li and qi":"Neo-Confucianism","Investigation of things":"Cheng–Zhu school",
-"Dogen":"Dōgen","Shobogenzo":"Shōbōgenzō","Shikantaza (just sitting)":"Shikantaza","Instructions for Practical Living (compiled)":"Instructions for Practical Living","Unity of knowing and acting":"Unity of knowledge and action",
+"Dogen":"Dōgen","Shobogenzo":"Shōbōgenzō","Shikantaza (just sitting)":"Shikantaza","Instructions for Practical Living (compiled)":"Wang Yangming","Unity of knowing and acting":"Wang Yangming",
 "Nishida Kitaro":"Kitaro Nishida","Pure experience":"Kitaro Nishida","Basho (place)":"Kitaro Nishida","Moral metaphysics":"Mou Zongsan","Brahma Sutra Bhashya":"Adi Shankara","Sri Bhashya":"Sri Bhashya","Eight limbs of yoga":"Ashtanga (eight limbs of yoga)","Nishkama karma":"Nishkama Karma"};
 function wiki(kind,label){const t=W[kind+":"+label]||W[label];
   return t?"https://en.wikipedia.org/wiki/"+encodeURIComponent(t.replace(/ /g,"_")):"https://en.wikipedia.org/w/index.php?search="+encodeURIComponent(label.replace(/\s*\(.*?\)/,""));}
