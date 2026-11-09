@@ -2,6 +2,8 @@
 
 An interactive timeline of key philosophers from the Greek & Western, Indian, and Chinese & East Asian traditions, from c. 1500 BCE to the present.
 
+**Live site:** https://mobiledge.github.io/philosophy-timeline/
+
 - People, texts and ideas are colour-coded (blue, amber, teal).
 - Every chip links to its Wikipedia article.
 - Search across names, texts and ideas; toggle traditions and hide texts or ideas.
