@@ -35,6 +35,11 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 .wrap{max-width:1240px;margin:0 auto}
 header{padding-block:40px 20px;display:grid;gap:10px}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.repo{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px}
+.repo:hover{border-color:var(--accent);color:var(--accent)}
+.repo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.repo svg{width:14px;height:14px;flex:none}
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 h1{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,52px);line-height:1.05;margin:0;text-wrap:balance}
 .lede{max-width:62ch;color:var(--muted);margin:0}
@@ -92,7 +97,10 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);max-width:70ch}
 
 <div class="wrap">
 <header>
-  <div class="eyebrow">c. 800 BCE → present · three traditions</div>
+  <div class="toprow">
+    <div class="eyebrow">c. 1500 BCE → present · three traditions</div>
+    <a class="repo" href="https://github.com/mobiledge/philosophy-timeline" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Source on GitHub</a>
+  </div>
   <h1>World Philosophy Timeline</h1>
   <p class="lede">The key thinkers of the Western, Indian, and Chinese &amp; East Asian traditions, era by era, with the texts they left and the ideas they are known for. Search or filter, and tap any person, text or idea to open it on Wikipedia.</p>
 </header>
